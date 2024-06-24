@@ -1,0 +1,47 @@
+.loginbtn {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+.signin {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.txtUsername{
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+}
+.txtPw{
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+}
+.lblSince{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.lblUsername{
+    -fx-text-fill: white;
+}
+.lblPassword{
+    -fx-text-fill: white;
+}
+.txtSlogan{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.txtSignup{
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+.lblTime{
+    -fx-text-fill: #869BC1;
+}
+.pagingPane{
+    -fx-background-color: #212936;
+}
+.lblPasswordValidate{
+    -fx-text-fill: red;
+}
+.lblUsernameValidate{
+    -fx-text-fill: red;
+}

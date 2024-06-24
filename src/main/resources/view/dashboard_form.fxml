@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootNode" prefHeight="1050.0" prefWidth="1680.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.DashboardFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#212936" height="1050.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="240.0" />
+      <Pane blendMode="SCREEN" layoutY="241.0" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30;">
+         <children>
+            <JFXButton fx:id="btnHome" alignment="CENTER" buttonType="RAISED" onAction="#btnHomeOnAction" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30; -fx-border-radius: 20;" text="Home" textAlignment="CENTER" textFill="#ebeef4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="58.0" layoutY="16.0">
+               <image>
+                  <Image url="@../asserts/icons/home.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="293.0" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30;">
+         <children>
+            <JFXButton fx:id="btnMembers" alignment="CENTER" buttonType="RAISED" onAction="#btnMembersOnAction" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30; -fx-border-radius: 20;" text="     Members" textAlignment="CENTER" textFill="#ebeef4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="57.0" layoutY="16.0">
+               <image>
+                  <Image url="@../asserts/icons/member-search.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="345.0" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30;">
+         <children>
+            <JFXButton fx:id="btnEmp" alignment="CENTER" buttonType="RAISED" onAction="#btnEmpOnAction" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30; -fx-border-radius: 20;" text="       Employees" textAlignment="CENTER" textFill="#ebeef4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="56.0" layoutY="16.0">
+               <image>
+                  <Image url="@../asserts/icons/employee-man.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="397.0" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30;">
+         <children>
+            <JFXButton fx:id="btnSupplement" alignment="CENTER" buttonType="RAISED" onAction="#btnSupplementOnAction" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30; -fx-border-radius: 20;" text="         Supplement" textFill="#ebeef4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="54.0" layoutY="16.0">
+               <image>
+                  <Image url="@../asserts/icons/protein.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="449.0" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30;">
+         <children>
+            <JFXButton fx:id="btnShop" alignment="CENTER" buttonType="RAISED" onAction="#btnShopOnAction" prefHeight="52.0" prefWidth="240.0" style="-fx-background-radius: 30; -fx-border-radius: 20;" text="Shop" textFill="#ebeef4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView layoutX="55.0" layoutY="18.0">
+               <image>
+                  <Image url="@../asserts/icons/seller-store.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="pagingPane" fx:id="pagingPane" layoutX="240.0" layoutY="120.0" prefHeight="930.0" prefWidth="1440.0" style="-fx-border-image-width: 0;" styleClass="pagingPane" stylesheets="@../values/style.css" />
+      <JFXButton fx:id="btnLogout" buttonType="RAISED" layoutX="45.0" layoutY="912.0" onAction="#btnLogoutOnAction" prefHeight="39.0" prefWidth="150.0" style="-fx-background-color: #263348;" text="Log Out" textFill="#ebeef4">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../asserts/icons/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#263348" height="120.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1680.0" />
+      <Line endX="38.0" endY="872.0" layoutX="202.0" layoutY="178.0" startX="38.0" startY="-178.0" stroke="#263348" strokeWidth="5.0" />
+      <Text fill="#e6180d" layoutX="266.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STRONGER EVERY DAY">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#ebeef4" layoutX="308.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Admin">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label id="lblTime" fx:id="lblTime" alignment="CENTER" layoutX="1442.0" layoutY="32.0" prefHeight="17.0" prefWidth="154.0" styleClass="lblTime" stylesheets="@../values/style.css" text="Time" textAlignment="CENTER" textFill="#869bc1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" alignment="CENTER" layoutX="1442.0" layoutY="76.0" prefHeight="17.0" prefWidth="154.0" text="Date" textAlignment="CENTER" textFill="#869bc1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="60.0">
+         <image>
+            <Image url="@../asserts/logo/GymGenius.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

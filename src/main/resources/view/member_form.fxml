@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pagingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1440.0" style="-fx-background-color: #212936;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.MemberFormController">
+   <children>
+      <Text fill="#ebeef4" layoutX="532.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Members Manage" textAlignment="CENTER" wrappingWidth="379.0">
+         <font>
+            <Font name="Arial Bold" size="36.0" />
+         </font>
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Text>
+      <TextField fx:id="txtMemberId" layoutX="105.0" layoutY="133.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="txtName" layoutX="105.0" layoutY="216.0" onKeyReleased="#txtKeyOnReleased" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="txtAddress" layoutX="105.0" layoutY="302.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="110.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Member ID">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#869bc1" layoutX="110.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#869bc1" layoutX="110.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblMember" layoutX="220.0" layoutY="439.0" onMouseClicked="#tableClick" prefHeight="450.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="colMemberId" prefWidth="104.0" text="ID" />
+          <TableColumn fx:id="colMemberName" prefWidth="162.0" text="Name" />
+            <TableColumn fx:id="colMemberAddress" prefWidth="219.0" text="Address" />
+            <TableColumn fx:id="colMemberMobile" prefWidth="202.0" text="Mobile number" />
+            <TableColumn fx:id="colMemberDOB" prefWidth="176.0" text="Date of birth" />
+            <TableColumn fx:id="colMemberGender" prefWidth="136.0" text="Gender" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtMobileNo" layoutX="771.0" layoutY="133.0" onKeyReleased="#txtKeyOnReleased" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="775.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile No">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#869bc1" layoutX="775.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="531.0" layoutY="375.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Clear  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/clean.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="721.0" layoutY="375.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Delete  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/trash.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="901.0" layoutY="375.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Update  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="1089.0" layoutY="375.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Save  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/save.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Text fill="#869bc1" layoutX="775.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtGender" layoutX="772.0" layoutY="302.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <DatePicker fx:id="pickerDate" layoutX="772.0" layoutY="216.0" prefHeight="35.0" prefWidth="379.0" />
+      <Label fx:id="lblMemberName" layoutX="105.0" layoutY="250.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+      <Label fx:id="lblMAddress" layoutX="105.0" layoutY="340.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+      <Label fx:id="lblMemberMobile" layoutX="771.0" layoutY="168.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+      <Label fx:id="lblMemberGender" layoutX="772.0" layoutY="340.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+   </children>
+</Pane>

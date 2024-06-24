@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pagingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1440.0" style="-fx-background-color: #212936;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SupplementFormController">
+   <children>
+      <Text fill="#ebeef4" layoutX="532.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplement Details" textAlignment="CENTER" wrappingWidth="379.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtSupplementId" layoutX="105.0" layoutY="134.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="110.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplement ID:" wrappingWidth="116.421875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtProductName" layoutX="105.0" layoutY="268.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="110.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name:" wrappingWidth="116.421875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtUnitPrice" layoutX="771.0" layoutY="133.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="775.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unit Price:" wrappingWidth="116.421875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtQty" layoutX="771.0" layoutY="268.0" prefHeight="35.0" prefWidth="379.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Text fill="#869bc1" layoutX="775.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty:" wrappingWidth="116.421875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblSupplement" layoutX="220.0" layoutY="439.0" onMouseClicked="#supplementTableClick" prefHeight="450.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="colSupplementId" prefWidth="199.0" text="ID" />
+          <TableColumn fx:id="colProductName" prefWidth="414.0" text="Product Name" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="182.0" text="Unit Price" />
+            <TableColumn fx:id="colQty" prefWidth="204.0" text="Qty" />
+        </columns>
+      </TableView>
+      <JFXButton contentDisplay="RIGHT" layoutX="531.0" layoutY="375.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Clear  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/clean.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="RIGHT" layoutX="721.0" layoutY="375.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Delete  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/trash.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="RIGHT" layoutX="901.0" layoutY="375.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Update  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="RIGHT" layoutX="1089.0" layoutY="375.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #263348;" text="Save  " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../asserts/icons/save.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label fx:id="lblSupName" layoutX="105.0" layoutY="302.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+      <Label fx:id="lblUnitPrice" layoutX="771.0" layoutY="168.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+      <Label fx:id="lblSupQTY" layoutX="771.0" layoutY="302.0" prefHeight="17.0" prefWidth="379.0" textFill="RED" />
+   </children>
+</Pane>

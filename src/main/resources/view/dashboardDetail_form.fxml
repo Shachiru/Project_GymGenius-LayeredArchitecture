@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pagingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1440.0" style="-fx-background-color: #212936; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.DashboardDetailFormController">
+   <children>
+      <ImageView fitHeight="934.0" fitWidth="1444.0" layoutY="-2.0">
+         <image>
+            <Image url="@../asserts/images/young-fitness-man-studio.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="222.0" layoutY="68.0" prefHeight="123.0" prefWidth="184.0" style="-fx-background-color: #263348; -fx-background-radius: 30;">
+         <children>
+            <Text fill="#ebeef4" layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Members Count" wrappingWidth="131.13671875">
+               <font>
+                  <Font name="Segoe UI Bold" size="16.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblMemberCount" alignment="CENTER" layoutX="37.0" layoutY="49.0" prefHeight="52.0" prefWidth="109.0" textFill="#e6180d">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font></Label>
+         </children>
+      </Pane>
+      <Pane layoutX="599.0" layoutY="68.0" prefHeight="123.0" prefWidth="184.0" style="-fx-background-color: #263348; -fx-background-radius: 30;">
+         <children>
+            <Text fill="#ebeef4" layoutX="33.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trainers Count" wrappingWidth="118.13671875">
+               <font>
+                  <Font name="Segoe UI Bold" size="16.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblEmployeeCount" alignment="CENTER" layoutX="37.0" layoutY="49.0" prefHeight="52.0" prefWidth="109.0" textFill="#e6180d">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font></Label>
+         </children>
+      </Pane>
+      <Pane layoutX="977.0" layoutY="68.0" prefHeight="123.0" prefWidth="184.0" style="-fx-background-color: #263348; -fx-background-radius: 30;">
+         <children>
+            <Text fill="#ebeef4" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplements QTY" wrappingWidth="142.13671875">
+               <font>
+                  <Font name="Segoe UI Bold" size="16.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblSupplements" alignment="CENTER" layoutX="38.0" layoutY="50.0" prefHeight="52.0" prefWidth="109.0" textFill="#e6180d">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font></Label>
+         </children>
+      </Pane>
+      <BarChart fx:id="barChart" layoutX="814.0" layoutY="364.0" prefHeight="456.0" prefWidth="536.0" style="-fx-background-color: #869bc1; -fx-background-radius: 20;" title="barChart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <PieChart fx:id="pieChart" layoutX="180.0" layoutY="362.0" prefHeight="458.0" prefWidth="510.0" style="-fx-background-color: #869bc1; -fx-background-radius: 20;" title="pieChart" />
+      <Line endX="-121.0" endY="897.0" layoutX="121.0" layoutY="153.0" startX="-121.0" startY="-152.0" stroke="#263348" strokeWidth="3.0" />
+   </children>
+</Pane>

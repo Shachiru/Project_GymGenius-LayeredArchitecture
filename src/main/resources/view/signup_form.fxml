@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="634.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SignUpFormController">
+   <children>
+      <ImageView fitHeight="634.0" fitWidth="470.0">
+         <image>
+            <Image url="@../asserts/images/signupBackground.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d0d0d" height="634.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="470.0" />
+      <JFXButton fx:id="btnSignUp" buttonType="RAISED" layoutX="185.0" layoutY="530.0" onAction="#btnSignUpOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #869BC1; -fx-background-radius: 30;" text="Sign Up">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="75.0" layoutY="310.0" text="Username :" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsername" layoutX="70.0" layoutY="340.0" prefHeight="46.0" prefWidth="320.0" promptText="Username" style="-fx-background-color: #EBEEF4; -fx-background-radius: 30;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="75.0" layoutY="410.0" text="Password :" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtPw" layoutX="70.0" layoutY="440.0" prefHeight="46.0" prefWidth="320.0" promptText="Password" style="-fx-background-color: #EBEEF4; -fx-background-radius: 30;">
+         <font>
+            <Font size="14.0" />
+         </font></PasswordField>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="59.0" layoutY="562.0">
+         <image>
+            <Image url="@../asserts/icons/backIcon.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtUserId" layoutX="70.0" layoutY="240.0" prefHeight="46.0" prefWidth="320.0" promptText="UserId" style="-fx-background-color: #EBEEF4; -fx-background-radius: 30;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="75.0" layoutY="210.0" text="UserId" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="160.0" layoutY="23.0">
+         <image>
+            <Image url="@../asserts/logo/GymGeniusLOGO.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
