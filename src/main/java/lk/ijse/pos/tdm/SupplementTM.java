@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class MemberTM {
+public class SupplementTM {
     private String id;
-    private String name;
-    private String address;
-    private String mobile;
-    private String dob;
-    private String gender;
+    private String productName;
+    private String unitPrice;
+    private String qty;
 }
