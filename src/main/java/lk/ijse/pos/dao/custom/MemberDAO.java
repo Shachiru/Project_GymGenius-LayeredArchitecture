@@ -1,4 +1,7 @@
 package lk.ijse.pos.dao.custom;
 
-public interface MemberDAO {
+import lk.ijse.pos.dao.CrudDAO;
+import lk.ijse.pos.entity.Member;
+
+public interface MemberDAO extends CrudDAO<Member> {
 }

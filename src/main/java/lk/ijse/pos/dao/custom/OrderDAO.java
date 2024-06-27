@@ -1,4 +1,7 @@
 package lk.ijse.pos.dao.custom;
 
-public interface OrderDAO {
+import lk.ijse.pos.dao.CrudDAO;
+import lk.ijse.pos.entity.Order;
+
+public interface OrderDAO extends CrudDAO<Order> {
 }
