@@ -5,16 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
-@NoArgsConstructor
 
-public class MemberDTO implements Serializable {
+public class EmployeeDTO implements Serializable {
     private String id;
     private String name;
     private String address;
     private String mobile;
-    private String dob;
-    private String gender;
-
+    private String empRole;
+    private String userId;
 }
