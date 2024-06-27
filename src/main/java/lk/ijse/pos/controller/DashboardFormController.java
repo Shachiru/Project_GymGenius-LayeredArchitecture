@@ -11,31 +11,22 @@ public class DashboardFormController {
 
     @FXML
     private JFXButton btnEmp;
-
     @FXML
     private JFXButton btnHome;
-
     @FXML
     private JFXButton btnLogout;
-
     @FXML
     private JFXButton btnMembers;
-
     @FXML
     private JFXButton btnShop;
-
     @FXML
     private JFXButton btnSupplement;
-
     @FXML
     private Label lblDate;
-
     @FXML
     private Label lblTime;
-
     @FXML
     private Pane pagingPane;
-
     @FXML
     private AnchorPane rootNode;
 

@@ -13,28 +13,20 @@ public class LoginFormController {
 
     @FXML
     private JFXButton btnLogin;
-
     @FXML
     private Hyperlink hyperSignUp;
-
     @FXML
     private Label lblPassword;
-
     @FXML
     private Label lblPasswordValidate;
-
     @FXML
     private Label lblUsername;
-
     @FXML
     private Label lblUsernameValidate;
-
     @FXML
     private AnchorPane rootNode;
-
     @FXML
     private PasswordField txtPw;
-
     @FXML
     private TextField txtUserName;
 

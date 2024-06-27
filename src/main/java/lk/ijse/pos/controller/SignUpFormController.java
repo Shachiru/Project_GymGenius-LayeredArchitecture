@@ -11,16 +11,12 @@ public class SignUpFormController {
 
     @FXML
     private JFXButton btnSignUp;
-
     @FXML
     private AnchorPane rootNode;
-
     @FXML
     private PasswordField txtPw;
-
     @FXML
     private TextField txtUserId;
-
     @FXML
     private TextField txtUsername;
 

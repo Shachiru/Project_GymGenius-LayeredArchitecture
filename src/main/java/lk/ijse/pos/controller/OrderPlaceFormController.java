@@ -14,61 +14,42 @@ public class OrderPlaceFormController {
 
     @FXML
     private JFXButton btnAddToCart;
-
     @FXML
     private JFXButton btnPlaceOrder;
-
     @FXML
     private JFXComboBox<?> cmbMemberId;
-
     @FXML
     private JFXComboBox<?> cmbSupplementId;
-
     @FXML
     private TableColumn<?, ?> colAction;
-
     @FXML
     private TableColumn<?, ?> colDesc;
-
     @FXML
     private TableColumn<?, ?> colQty;
-
     @FXML
     private TableColumn<?, ?> colSupplementId;
-
     @FXML
     private TableColumn<?, ?> colTotal;
-
     @FXML
     private TableColumn<?, ?> colUnitPrice;
-
     @FXML
     private Label lblDescription;
-
     @FXML
     private Label lblMemberName;
-
     @FXML
     private Label lblOrderDate;
-
     @FXML
     private Label lblOrderId;
-
     @FXML
     private Label lblQtyOnHand;
-
     @FXML
     private Label lblUnitPrice;
-
     @FXML
     private Pane pagingPane;
-
     @FXML
     private TableView<?> tblShopCart;
-
     @FXML
     private TextField txtQty;
-
     @FXML
     private TextField txtTotal;
 

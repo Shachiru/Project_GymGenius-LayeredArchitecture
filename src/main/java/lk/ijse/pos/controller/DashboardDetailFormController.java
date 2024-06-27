@@ -10,19 +10,14 @@ public class DashboardDetailFormController {
 
     @FXML
     private BarChart<?, ?> barChart;
-
     @FXML
     private Label lblEmployeeCount;
-
     @FXML
     private Label lblMemberCount;
-
     @FXML
     private Label lblSupplements;
-
     @FXML
     private Pane pagingPane;
-
     @FXML
     private PieChart pieChart;
 
