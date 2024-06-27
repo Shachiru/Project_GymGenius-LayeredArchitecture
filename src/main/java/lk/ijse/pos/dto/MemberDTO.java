@@ -11,7 +11,6 @@ public class MemberDTO implements Serializable {
     private String gender;
 
     public MemberDTO() {
-
     }
 
     public String getId() {
@@ -69,5 +68,17 @@ public class MemberDTO implements Serializable {
         this.mobile = mobile;
         this.dob = dob;
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberDTO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", dob='" + dob + '\'' +
+                ", gender='" + gender + '\'' +
+                '}';
     }
 }
