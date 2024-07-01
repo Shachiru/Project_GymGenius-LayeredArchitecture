@@ -10,8 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.ijse.pos.bo.BOFactory;
+import lk.ijse.pos.bo.custom.MemberBO;
 
 public class MemberFormController {
+    MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
 
     @FXML
     private TableColumn<?, ?> colMemberAddress;
