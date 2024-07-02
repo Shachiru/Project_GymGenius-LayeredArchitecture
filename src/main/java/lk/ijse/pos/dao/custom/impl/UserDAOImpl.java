@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public String generateNextId() throws SQLException, ClassNotFoundException {
-        return "";
+    public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("Select ID from user order by ID desc limit 1");
     }
 
     @Override

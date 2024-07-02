@@ -12,15 +12,9 @@ import java.util.ArrayList;
 
 public class MemberDAOImpl implements MemberDAO {
     @Override
-    public String generateNextId() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("Select ID from member order by ID desc limit 1");
-        if (rst.next()){
-            String id = rst.getString("ID");
-            int newMemberId = Integer.parseInt(id.replace("M00-","")) + 1;
-            return String.format("M00-%03d", newMemberId);
-        }else {
-            return "M00-001";
-        }
+    public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("Select ID from member order by ID desc limit 1");
+
     }
 
     @Override

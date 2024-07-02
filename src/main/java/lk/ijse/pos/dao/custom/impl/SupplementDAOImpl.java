@@ -10,15 +10,9 @@ import java.util.ArrayList;
 
 public class SupplementDAOImpl implements SupplementDAO {
     @Override
-    public String generateNextId() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("Select ID from supplements order by ID desc limit 1");
-        if (rst.next()){
-            String id = rst.getString("ID");
-            int newSupId = Integer.parseInt(id.replace("Sup00-","")) + 1;
-            return String.format("Sup00-%03d", newSupId);
-        }else {
-            return "Sup00-001";
-        }
+    public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("Select ID from supplements order by ID desc limit 1");
+
     }
 
     @Override

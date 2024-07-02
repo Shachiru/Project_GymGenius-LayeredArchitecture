@@ -1,10 +1,11 @@
 package lk.ijse.pos.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CrudDAO<T> extends SuperDAO{
-    public String generateNextId() throws SQLException, ClassNotFoundException;
+    public ResultSet generateNextId() throws SQLException, ClassNotFoundException;
 
     public ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 

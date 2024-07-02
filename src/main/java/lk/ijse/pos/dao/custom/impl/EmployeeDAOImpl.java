@@ -10,15 +10,9 @@ import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
-    public String generateNextId() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("Select ID from employee order by ID desc limit 1");
-        if (rst.next()){
-            String id = rst.getString("ID");
-            int newEmployeeId = Integer.parseInt(id.replace("E00-","")) + 1;
-            return String.format("E00-%03d", newEmployeeId);
-        }else {
-            return "E00-001";
-        }
+    public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("Select ID from employee order by ID desc limit 1");
+
     }
 
     @Override

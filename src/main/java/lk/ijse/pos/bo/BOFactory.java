@@ -1,7 +1,10 @@
 package lk.ijse.pos.bo;
 
 import lk.ijse.pos.bo.custom.MemberBO;
+import lk.ijse.pos.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.pos.bo.custom.impl.MemberBOImpl;
+
+import static lk.ijse.pos.dao.DAOFactory.DAOTypes.EMPLOYEE;
 
 public class BOFactory {
     public static BOFactory boFactory;
@@ -11,7 +14,7 @@ public class BOFactory {
     }
 
     public enum BOType{
-        MEMBER
+        MEMBER,EMPLOYEE
     }
 
     public static BOFactory getInstance(){
@@ -22,6 +25,8 @@ public class BOFactory {
         switch (type){
             case MEMBER:
                 return new MemberBOImpl();
+            case EMPLOYEE:
+                return new EmployeeBOImpl();
             default:
                 return null;
         }

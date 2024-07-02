@@ -6,6 +6,7 @@ import lk.ijse.pos.dao.custom.EmployeeDAO;
 import lk.ijse.pos.dto.EmployeeDTO;
 import lk.ijse.pos.entity.Employee;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class EmployeeBOImpl implements EmployeeBO {
     EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAOType(DAOFactory.DAOTypes.EMPLOYEE);
 
     @Override
-    public String generateNextIdEmployee() throws SQLException, ClassNotFoundException {
+    public ResultSet generateNextIdEmployee() throws SQLException, ClassNotFoundException {
         return employeeDAO.generateNextId();
     }
 
