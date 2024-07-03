@@ -56,13 +56,6 @@ public class EmployeeFormController implements Initializable {
     private TextField txtEmpRole;
 
     EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBOType(BOFactory.BOType.EMPLOYEE);
-/*
-    String id = txtEmpId.getText();
-    String name = txtEmpName.getText();
-    String address = txtEmpAddress.getText();
-    String mobile = txtEmpMobile.getText();
-    String role = txtEmpRole.getText();
-    String userId = "U001";*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
