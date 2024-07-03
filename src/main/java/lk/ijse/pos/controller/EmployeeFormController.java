@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.EmployeeBO;
-import lk.ijse.pos.dao.custom.impl.EmployeeDAOImpl;
 import lk.ijse.pos.dto.EmployeeDTO;
 import lk.ijse.pos.tdm.EmployeeTM;
 
@@ -57,17 +56,17 @@ public class EmployeeFormController implements Initializable {
     private TextField txtEmpRole;
 
     EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBOType(BOFactory.BOType.EMPLOYEE);
-
+/*
     String id = txtEmpId.getText();
     String name = txtEmpName.getText();
     String address = txtEmpAddress.getText();
     String mobile = txtEmpMobile.getText();
     String role = txtEmpRole.getText();
-    String userId = "U001";
+    String userId = "U001";*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        genarateEmployeeId();
+        generateEmployeeId();
         loadEmployeeTable();
         setCellValueFactory();
     }
@@ -85,9 +84,7 @@ public class EmployeeFormController implements Initializable {
                         employeeDTO.getUserId()
                 ));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -100,26 +97,23 @@ public class EmployeeFormController implements Initializable {
         colEmpRole.setCellValueFactory(new PropertyValueFactory<>("empRole"));
     }
 
-    private String genarateEmployeeId() {
+    public void generateEmployeeId() {
         try {
             ResultSet rst = employeeBO.generateNextIdEmployee();
-            String currentEmpId = null;
+            String currentEmpId;
             if (rst.next()){
                 currentEmpId = rst.getString(1);
-                return nextEmpId(currentEmpId);
+                String nextEmpId = nextEmpId(currentEmpId);
+                txtEmpId.setText(nextEmpId);
             }
-            return nextEmpId(currentEmpId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private String nextEmpId(String currentEmpId) {
-        if (id != null) {
-            String[] split = id.split("Emp ");
+        if (currentEmpId != null) {
+            String[] split = currentEmpId.split("Emp ");
             int empId = Integer.parseInt(split[1]);
             empId++;
             return "Emp " + empId;
@@ -143,6 +137,7 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtEmpId.getText();
         try {
             boolean isDeleted = employeeBO.deleteEmployee(id);
             if (isDeleted){
@@ -157,6 +152,12 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
+        String id = txtEmpId.getText();
+        String name = txtEmpName.getText();
+        String address = txtEmpAddress.getText();
+        String mobile = txtEmpMobile.getText();
+        String role = txtEmpRole.getText();
+        String userId = "U001";
         try {
             boolean isSaved = employeeBO.saveEmployee(new EmployeeDTO(id, name, address, mobile, role, userId));
             if (isSaved){
@@ -170,6 +171,12 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String id = txtEmpId.getText();
+        String name = txtEmpName.getText();
+        String address = txtEmpAddress.getText();
+        String mobile = txtEmpMobile.getText();
+        String role = txtEmpRole.getText();
+        String userId = "U001";
         try {
             boolean isUpdated = employeeBO.updateEmployee(new EmployeeDTO(id,name,address,mobile,role,userId));
             if (isUpdated){

@@ -6,6 +6,7 @@ import lk.ijse.pos.dao.custom.MemberDAO;
 import lk.ijse.pos.dto.MemberDTO;
 import lk.ijse.pos.entity.Member;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class MemberBOImpl implements MemberBO {
     MemberDAO memberDAO = (MemberDAO) DAOFactory.getDaoFactory().getDAOType(DAOFactory.DAOTypes.MEMBER);
 
     @Override
-    public String generateNextIdMember() throws SQLException, ClassNotFoundException {
+    public ResultSet generateNextIdMember() throws SQLException, ClassNotFoundException {
         return memberDAO.generateNextId();
     }
 

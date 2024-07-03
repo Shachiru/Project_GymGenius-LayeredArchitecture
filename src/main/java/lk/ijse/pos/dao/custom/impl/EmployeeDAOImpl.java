@@ -11,8 +11,7 @@ import java.util.ArrayList;
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("Select ID from employee order by ID desc limit 1");
-
+        return SQLUtil.execute("SELECT ID from employee order by ID desc limit 1");
     }
 
     @Override
