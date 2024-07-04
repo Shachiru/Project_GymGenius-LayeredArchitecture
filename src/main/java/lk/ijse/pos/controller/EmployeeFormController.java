@@ -94,9 +94,9 @@ public class EmployeeFormController implements Initializable {
     }
 
     public void generateEmployeeId() {
-        String currentEmpId;
         try {
             ResultSet rst = employeeBO.generateNextIdEmployee();
+            String currentEmpId;
             if (rst.next()){
                 currentEmpId = rst.getString(1);
                 String nextEmpId = nextEmpId(currentEmpId);
@@ -167,6 +167,7 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+
         String id = txtEmpId.getText();
         String name = txtEmpName.getText();
         String address = txtEmpAddress.getText();

@@ -42,7 +42,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public ResultSet verifyCredentials(String username, String password) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT Password from user where Username=?");
+        ResultSet resultSet = SQLUtil.execute("SELECT Password from user where Username=?",username);
+        return resultSet;
 
 
     }

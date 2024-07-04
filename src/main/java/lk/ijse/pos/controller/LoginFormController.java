@@ -14,7 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.MemberBO;
+import lk.ijse.pos.bo.custom.UserBO;
 import lk.ijse.pos.bo.custom.impl.MemberBOImpl;
+import lk.ijse.pos.bo.custom.impl.UserBOImpl;
 import lk.ijse.pos.dao.custom.impl.UserDAOImpl;
 import lk.ijse.pos.util.Navigation;
 
@@ -22,8 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginFormController {
-
-
+    UserBO userBO = (UserBO) BOFactory.getInstance().getBOType(BOFactory.BOType.USER);
 
     @FXML
     private JFXButton btnLogin;
@@ -45,22 +46,30 @@ public class LoginFormController {
     private TextField txtUserName;
 
     @FXML
-    void btnLoginOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        // bo eka through call krnn ona
+    void btnLoginOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+        String user = txtUserName.getText();
+        String pwd = txtPw.getText();
 
+        boolean b = userBO.verifyCredentials(user,pwd);
+        if(b){
+            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_form.fxml"));
+            Scene scene = new Scene(rootNode);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("SignUp Form");
+            stage.show();
+        }else {
+            System.out.println("failed");
+        }
     }
 
     @FXML
     void linkSignUpOnAction(ActionEvent event) throws IOException {
-
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/signup_form.fxml"));
-
         Scene scene = new Scene(rootNode);
         Stage stage = new Stage();
         stage.setScene(scene);
-
         stage.setTitle("SignUp Form");
-
         stage.show();
     }
 

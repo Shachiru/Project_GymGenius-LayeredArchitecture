@@ -4,6 +4,7 @@ import lk.ijse.pos.dao.custom.EmployeeDAO;
 import lk.ijse.pos.dao.custom.MemberDAO;
 import lk.ijse.pos.dao.custom.impl.EmployeeDAOImpl;
 import lk.ijse.pos.dao.custom.impl.MemberDAOImpl;
+import lk.ijse.pos.dao.custom.impl.UserDAOImpl;
 
 import java.security.PublicKey;
 
@@ -27,6 +28,8 @@ public SuperDAO getDAOType(DAOTypes type) {
                 return new MemberDAOImpl();
             case EMPLOYEE:
                 return new EmployeeDAOImpl();
+            case USER:
+                return new UserDAOImpl();
             default:
                 return null;
         }
