@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,18 +66,20 @@ public class EmployeeFormController implements Initializable {
     }
 
     private void loadEmployeeTable() {
+        ObservableList<EmployeeTM> tmList = FXCollections.observableArrayList();
         try {
             ArrayList<EmployeeDTO> allEmployee = employeeBO.getAllEmployee();
             for (EmployeeDTO employeeDTO : allEmployee) {
-                tblEmployee.getItems().add(new EmployeeTM(
+                EmployeeTM employeeTM = new EmployeeTM(
                         employeeDTO.getId(),
                         employeeDTO.getName(),
                         employeeDTO.getAddress(),
                         employeeDTO.getMobile(),
                         employeeDTO.getEmpRole(),
-                        employeeDTO.getUserId()
-                ));
+                        employeeDTO.getUserId());
+                tmList.add(employeeTM);
             }
+            tblEmployee.setItems(tmList);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -91,9 +94,9 @@ public class EmployeeFormController implements Initializable {
     }
 
     public void generateEmployeeId() {
+        String currentEmpId;
         try {
             ResultSet rst = employeeBO.generateNextIdEmployee();
-            String currentEmpId;
             if (rst.next()){
                 currentEmpId = rst.getString(1);
                 String nextEmpId = nextEmpId(currentEmpId);
@@ -201,3 +204,6 @@ public class EmployeeFormController implements Initializable {
     }
 
 }
+
+/////  exist id method ekk ghnna ona
+
