@@ -13,8 +13,7 @@ import java.util.ArrayList;
 public class MemberDAOImpl implements MemberDAO {
     @Override
     public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("Select ID from member order by ID desc limit 1");
-
+        return SQLUtil.execute("SELECT ID from member order by ID desc limit 1");
     }
 
     @Override
@@ -23,12 +22,12 @@ public class MemberDAOImpl implements MemberDAO {
         ResultSet rst = SQLUtil.execute("SELECT * FROM member");
         while (rst.next()){
             Member member = new Member(
-                    rst.getString("id"),
-                    rst.getString("name"),
-                    rst.getString("address"),
-                    rst.getString("mobile"),
-                    rst.getString("dob"),
-                    rst.getString("gender"));
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6));
             allMembers.add(member);
         }
         return allMembers;
@@ -47,7 +46,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public boolean update(Member entity) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("Update member set name=?, address=?, mobile=?, dob=?, gender=? where id=?",
+        return SQLUtil.execute("UPDATE member set name=?, address=?, mobile=?, dob=?, gender=? where id=?",
                 entity.getName(),
                 entity.getAddress(),
                 entity.getMobile(),

@@ -8,16 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface MemberBO extends SuperBO {
+    ResultSet generateNextIdMember() throws SQLException, ClassNotFoundException ;
 
-    public ResultSet generateNextIdMember() throws SQLException, ClassNotFoundException ;
+    ArrayList<MemberDTO> getAllMember() throws SQLException, ClassNotFoundException ;
 
-    public ArrayList<MemberDTO> getAllMember() throws SQLException, ClassNotFoundException ;
+    boolean saveMember(MemberDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean saveMember(MemberDTO dto) throws SQLException, ClassNotFoundException;
+    boolean updateMember(MemberDTO dto) throws SQLException, ClassNotFoundException ;
 
-    public boolean updateMember(MemberDTO dto) throws SQLException, ClassNotFoundException ;
+    boolean deleteMember(String id) throws SQLException, ClassNotFoundException;
 
-    public boolean deleteMember(String id) throws SQLException, ClassNotFoundException;
-
-    public int countMember() throws SQLException, ClassNotFoundException ;
+    int countMember() throws SQLException, ClassNotFoundException ;
 }

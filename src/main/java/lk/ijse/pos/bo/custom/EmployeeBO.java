@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EmployeeBO extends SuperBO {
+    ResultSet generateNextIdEmployee() throws SQLException, ClassNotFoundException;
 
-    public ResultSet generateNextIdEmployee() throws SQLException, ClassNotFoundException;
+    ArrayList<EmployeeDTO> getAllEmployee() throws SQLException, ClassNotFoundException;
 
-    public ArrayList<EmployeeDTO> getAllEmployee() throws SQLException, ClassNotFoundException;
+    boolean saveEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean saveEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException;
+    boolean updateEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean updateEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException;
+    boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException;
 
-    public boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException;
+    int countEmployee() throws SQLException, ClassNotFoundException;
 
-    public int countEmployee() throws SQLException, ClassNotFoundException;
 }

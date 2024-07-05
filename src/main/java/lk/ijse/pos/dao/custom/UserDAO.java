@@ -8,5 +8,5 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface UserDAO extends CrudDAO<User> {
-    public ResultSet verifyCredentials(String username, String password) throws SQLException, ClassNotFoundException;
+    ResultSet verifyCredentials(String username, String password) throws SQLException, ClassNotFoundException;
 }

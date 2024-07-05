@@ -49,14 +49,13 @@ public class LoginFormController {
     void btnLoginOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         String user = txtUserName.getText();
         String pwd = txtPw.getText();
-
         boolean b = userBO.verifyCredentials(user,pwd);
         if(b){
             Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_form.fxml"));
             Scene scene = new Scene(rootNode);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("SignUp Form");
+            stage.setTitle("Dashboard Form");
             stage.show();
         }else {
             System.out.println("failed");
@@ -72,5 +71,4 @@ public class LoginFormController {
         stage.setTitle("SignUp Form");
         stage.show();
     }
-
 }

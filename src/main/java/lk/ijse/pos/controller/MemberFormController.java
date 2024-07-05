@@ -1,13 +1,10 @@
 package lk.ijse.pos.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,12 +17,12 @@ import lk.ijse.pos.tdm.MemberTM;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MemberFormController implements Initializable {
 
-    MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
 
     @FXML
     private TableColumn<?, ?> colMemberAddress;
@@ -64,51 +61,22 @@ public class MemberFormController implements Initializable {
     @FXML
     private TextField txtName;
 
-    @FXML
-    void btnClearOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnSaveOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void tableClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void txtKeyOnReleased(KeyEvent event) {
-
-    }
+    MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        generateMemId();
+        try {
+            txtMemberId.setText(generateMemId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         loadMemberTable();
         setCellValueFactory();
-
+        initUI();
     }
 
-    private void setCellValueFactory() {
-        colMemberId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colMemberName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colMemberAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colMemberMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
-        colMemberDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        colMemberGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+    private void initUI() {
+        txtMemberId.setDisable(true);
     }
 
     private void loadMemberTable() {
@@ -121,26 +89,114 @@ public class MemberFormController implements Initializable {
                         memberDTO.getAddress(),
                         memberDTO.getMobile(),
                         memberDTO.getDob(),
-                        memberDTO.getGender()
-                ));
+                        memberDTO.getGender()));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String generateMemId() {
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+        txtMemberId.setText("");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtMobileNo.setText("");
+        pickerDate.setValue(null);
+        txtGender.setText("");
+    }
+
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+        String id = txtMemberId.getText();
         try {
-            ResultSet rst = memberBO.generateNextIdMember();
-            String currentMemberId = rst.getString(1);
-            if (rst.next()){
-                currentMemberId = rst.getString(1);
-                return nextMemId(currentMemberId);
+            boolean isDeleted = memberBO.deleteMember(id);
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!");
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return null;
+    }
+
+    @FXML
+    void btnSaveOnAction(ActionEvent event) {
+        String id = txtMemberId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String mobile = txtMobileNo.getText();
+        String dob = String.valueOf(pickerDate.getValue());
+        String gender = txtGender.getText();
+        try {
+            boolean isSaved = memberBO.saveMember(new MemberDTO(id, name, address, mobile, dob, gender));
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
+                loadMemberTable();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        String id = txtMemberId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String mobile = txtMobileNo.getText();
+        String dob = String.valueOf(pickerDate.getValue());
+        String gender = txtGender.getText();
+        try {
+            boolean isUpdated = memberBO.updateMember(new MemberDTO(id, name, address, mobile, dob, gender));
+            if (isUpdated){
+                new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
+                loadMemberTable();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void tableClick(MouseEvent event) {
+        TablePosition pos = tblMember.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        ObservableList<TableColumn<MemberTM,?> > columns = tblMember.getColumns();
+
+        txtMemberId.setText(columns.get(0).getCellData(row).toString());
+        txtName.setText(columns.get(1).getCellData(row).toString());
+        txtAddress.setText(columns.get(2).getCellData(row).toString());
+        txtMobileNo.setText(columns.get(3).getCellData(row).toString());
+        pickerDate.setValue(LocalDate.parse(columns.get(4).getCellData(row).toString()));
+        txtGender.setText(columns.get(5).getCellData(row).toString());
+    }
+
+    @FXML
+    void txtKeyOnReleased(KeyEvent event) {
+
+    }
+
+    private void setCellValueFactory() {
+        colMemberId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colMemberName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colMemberAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colMemberMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        colMemberDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colMemberGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+    }
+
+    private String generateMemId() {
+        try {
+            ResultSet rst = memberBO.generateNextIdMember();
+            String currentMemberId = "";
+            if (rst.next()){
+                currentMemberId = rst.getString(1);
+                return nextMemId(currentMemberId);
+            }
+            return nextMemId(null);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String nextMemId(String currentMemberId) {

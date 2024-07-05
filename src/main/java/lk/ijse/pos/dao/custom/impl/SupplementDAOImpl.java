@@ -12,7 +12,6 @@ public class SupplementDAOImpl implements SupplementDAO {
     @Override
     public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("Select ID from supplements order by ID desc limit 1");
-
     }
 
     @Override
@@ -21,10 +20,10 @@ public class SupplementDAOImpl implements SupplementDAO {
         ResultSet rst = SQLUtil.execute("SELECT * FROM supplements");
         while (rst.next()){
             Supplement supplement = new Supplement(
-                    rst.getString("id"),
-                    rst.getString("productName"),
-                    rst.getString("unitPrice"),
-                    rst.getString("qty"));
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4));
             allSupplements.add(supplement);
         }
         return allSupplements;

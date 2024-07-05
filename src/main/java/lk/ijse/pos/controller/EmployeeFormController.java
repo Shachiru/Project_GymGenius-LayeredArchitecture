@@ -60,26 +60,32 @@ public class EmployeeFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        generateEmployeeId();
+        try {
+            txtEmpId.setText(generateEmployeeId());
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         loadEmployeeTable();
         setCellValueFactory();
+        initUI();
+    }
+
+    private void initUI() {
+        txtEmpId.setDisable(true);
     }
 
     private void loadEmployeeTable() {
-        ObservableList<EmployeeTM> tmList = FXCollections.observableArrayList();
         try {
             ArrayList<EmployeeDTO> allEmployee = employeeBO.getAllEmployee();
             for (EmployeeDTO employeeDTO : allEmployee) {
-                EmployeeTM employeeTM = new EmployeeTM(
+                tblEmployee.getItems().add(new EmployeeTM(
                         employeeDTO.getId(),
                         employeeDTO.getName(),
                         employeeDTO.getAddress(),
                         employeeDTO.getMobile(),
                         employeeDTO.getEmpRole(),
-                        employeeDTO.getUserId());
-                tmList.add(employeeTM);
+                        employeeDTO.getUserId()));
             }
-            tblEmployee.setItems(tmList);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -93,15 +99,15 @@ public class EmployeeFormController implements Initializable {
         colEmpRole.setCellValueFactory(new PropertyValueFactory<>("empRole"));
     }
 
-    public void generateEmployeeId() {
+    public String generateEmployeeId() throws SQLException, ClassNotFoundException {
         try {
             ResultSet rst = employeeBO.generateNextIdEmployee();
-            String currentEmpId;
+            String currentEmpId = "";
             if (rst.next()){
                 currentEmpId = rst.getString(1);
-                String nextEmpId = nextEmpId(currentEmpId);
-                txtEmpId.setText(nextEmpId);
+                return nextEmpId(currentEmpId);
             }
+            return nextEmpId(null);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -119,16 +125,12 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-        clearFields();
-
-    }
-
-    private void clearFields() {
         txtEmpId.setText("");
         txtEmpName.setText("");
         txtEmpAddress.setText("");
         txtEmpMobile.setText("");
         txtEmpRole.setText("");
+
     }
 
     @FXML
@@ -143,11 +145,10 @@ public class EmployeeFormController implements Initializable {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = txtEmpId.getText();
         String name = txtEmpName.getText();
         String address = txtEmpAddress.getText();
@@ -160,14 +161,13 @@ public class EmployeeFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee saved").show();
                 loadEmployeeTable();
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"Enter update button").show();
         }
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-
         String id = txtEmpId.getText();
         String name = txtEmpName.getText();
         String address = txtEmpAddress.getText();
@@ -201,7 +201,6 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void txtKeyOnReleased(KeyEvent event) {
-
     }
 
 }
