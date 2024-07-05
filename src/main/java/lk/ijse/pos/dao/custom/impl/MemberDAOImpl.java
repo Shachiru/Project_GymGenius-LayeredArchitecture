@@ -64,7 +64,7 @@ public class MemberDAOImpl implements MemberDAO {
     public int count() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT COUNT(ID) FROM member");
         if (rst.next()) {
-            int memberCount = Integer.parseInt(rst.getString("member_count"));
+            int memberCount = Integer.parseInt(rst.getString(1));
             return memberCount;
         }
         return Integer.parseInt(null);

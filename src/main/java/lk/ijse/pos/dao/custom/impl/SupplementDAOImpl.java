@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class SupplementDAOImpl implements SupplementDAO {
     @Override
     public ResultSet generateNextId() throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("Select ID from supplements order by ID desc limit 1");
+        return SQLUtil.execute("SELECT ID from supplements order by ID desc limit 1");
     }
 
     @Override
@@ -54,12 +54,13 @@ public class SupplementDAOImpl implements SupplementDAO {
 
     @Override
     public int count() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("Select count(ID) as sup_count from supplements");
+        ResultSet rst = SQLUtil.execute("SELECT count(ID) as sup_count from supplements");
         if (rst.next()){
-            int supCount = Integer.parseInt(rst.getString("supplement_count"));
+            int supCount = Integer.parseInt(rst.getString(1));
             return supCount;
         }
         return Integer.parseInt(null);
     }
+
     ///////////  thawa updateQTY method ekak ithurui    ////////////
 }
