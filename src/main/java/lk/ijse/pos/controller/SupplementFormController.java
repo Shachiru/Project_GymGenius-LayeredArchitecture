@@ -12,6 +12,7 @@ import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.SupplementBO;
 import lk.ijse.pos.dto.SupplementDTO;
 import lk.ijse.pos.tdm.SupplementTM;
+import lombok.SneakyThrows;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -127,13 +128,14 @@ public class SupplementFormController implements Initializable {
             boolean isDeleted = supplementBO.deleteSupplement(id);
             if (isDeleted){
                 new Alert(Alert.AlertType.CONFIRMATION,"Deleted");
-                loadSupplementTable();
             }
+            loadSupplementTable();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @SneakyThrows
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String id = txtSupplementId.getText();
@@ -143,11 +145,11 @@ public class SupplementFormController implements Initializable {
         try {
             boolean isSaved = supplementBO.saveSupplement(new SupplementDTO(id, productName, unitPrice, qty));
             if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"Saved");
+                new Alert(Alert.AlertType.CONFIRMATION,"Saved").show();
                 loadSupplementTable();
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"Error").show();
         }
     }
 
@@ -162,8 +164,8 @@ public class SupplementFormController implements Initializable {
             boolean isUpdated = supplementBO.updateSupplement(new SupplementDTO(id, productName, unitPrice, qty));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated");
-                loadSupplementTable();
             }
+            loadSupplementTable();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

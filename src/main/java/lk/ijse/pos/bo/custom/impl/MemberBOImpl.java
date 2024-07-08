@@ -9,6 +9,7 @@ import lk.ijse.pos.entity.Member;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MemberBOImpl implements MemberBO {
 
@@ -47,5 +48,17 @@ public class MemberBOImpl implements MemberBO {
     @Override
     public int countMember() throws SQLException, ClassNotFoundException {
         return memberDAO.count();
+    }
+
+    @Override
+    public List<String> getMemIds() throws SQLException, ClassNotFoundException {
+        return memberDAO.getMemIds();
+    }
+
+    @Override
+    public MemberDTO searchMember(String memberId) throws SQLException, ClassNotFoundException {
+        Member member = memberDAO.search(memberId);
+        MemberDTO memberDTO = new MemberDTO(member.getId(),member.getName(),member.getAddress(),member.getMobile(),member.getDob(),member.getGender());
+        return memberDTO;
     }
 }

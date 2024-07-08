@@ -108,7 +108,9 @@ public class EmployeeFormController implements Initializable {
                 return nextEmpId(currentEmpId);
             }
             return nextEmpId(null);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

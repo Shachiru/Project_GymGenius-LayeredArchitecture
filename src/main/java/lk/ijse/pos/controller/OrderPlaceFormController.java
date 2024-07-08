@@ -2,22 +2,35 @@ package lk.ijse.pos.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import lk.ijse.pos.bo.BOFactory;
+import lk.ijse.pos.bo.custom.MemberBO;
+import lk.ijse.pos.dto.MemberDTO;
+import lk.ijse.pos.entity.Member;
 
-public class OrderPlaceFormController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
 
+public class OrderPlaceFormController implements Initializable {
     @FXML
     private JFXButton btnAddToCart;
+
     @FXML
     private JFXButton btnPlaceOrder;
     @FXML
-    private JFXComboBox<?> cmbMemberId;
+    private JFXComboBox<String> cmbMemberId;
     @FXML
     private JFXComboBox<?> cmbSupplementId;
     @FXML
@@ -53,6 +66,42 @@ public class OrderPlaceFormController {
     @FXML
     private TextField txtTotal;
 
+    MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCellValueFactory();
+        getMemberId();
+        getSupplementId();
+        setDate();
+    }
+
+    private void setDate() {
+        LocalDate now = LocalDate.now();
+        lblOrderDate.setText(String.valueOf(now));
+    }
+
+    private void getSupplementId() {
+
+    }
+
+    private void getMemberId() {
+        ObservableList<String> memberList = FXCollections.observableArrayList();
+        try {
+            List<String> memberIdList = memberBO.getMemIds();
+            for (String memberId : memberIdList) {
+                memberList.add(memberId);
+            }
+            cmbMemberId.setItems(memberList);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setCellValueFactory() {
+
+    }
+
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
 
@@ -65,7 +114,13 @@ public class OrderPlaceFormController {
 
     @FXML
     void cmbMemberIdOnAction(ActionEvent event) {
-
+        String memberId = cmbMemberId.getValue();
+        try {
+            MemberDTO member = memberBO.searchMember(memberId);
+            lblMemberName.setText(member.getName());
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

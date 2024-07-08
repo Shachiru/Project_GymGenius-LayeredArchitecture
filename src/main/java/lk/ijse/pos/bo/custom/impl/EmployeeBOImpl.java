@@ -22,7 +22,7 @@ public class EmployeeBOImpl implements EmployeeBO {
     public ArrayList<EmployeeDTO> getAllEmployee() throws SQLException, ClassNotFoundException {
         ArrayList<EmployeeDTO> allEmployees = new ArrayList<>();
         ArrayList<Employee> all = employeeDAO.getAll();
-        for (Employee e:all){
+        for (Employee e : all){
             allEmployees.add(new EmployeeDTO(e.getId(),e.getName(),e.getAddress(),e.getMobile(),e.getEmpRole(),e.getUserId()));
         }
         return allEmployees;
