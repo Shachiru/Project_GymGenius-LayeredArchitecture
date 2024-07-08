@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.layout.Pane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.MemberBO;
 import lk.ijse.pos.dto.MemberDTO;
+import lk.ijse.pos.entity.Member;
+import lk.ijse.pos.tdm.EmployeeTM;
 import lk.ijse.pos.tdm.MemberTM;
 
 import java.net.URL;
@@ -80,17 +83,21 @@ public class MemberFormController implements Initializable {
     }
 
     private void loadMemberTable() {
+        ObservableList<MemberTM> tmList = FXCollections.observableArrayList();
         try {
             ArrayList<MemberDTO> allMember = memberBO.getAllMember();
             for (MemberDTO memberDTO : allMember){
-                tblMember.getItems().add(new MemberTM(
+                MemberTM memberTM = new MemberTM(
                         memberDTO.getId(),
                         memberDTO.getName(),
                         memberDTO.getAddress(),
                         memberDTO.getMobile(),
                         memberDTO.getDob(),
-                        memberDTO.getGender()));
+                        memberDTO.getGender());
+                tmList.add(memberTM);
             }
+            tblMember.setItems(tmList);
+            tblMember.refresh();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -112,9 +119,14 @@ public class MemberFormController implements Initializable {
         try {
             boolean isDeleted = memberBO.deleteMember(id);
             if (isDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!");
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
+                //tblMember.refresh();
+                //setCellValueFactory();
+                loadMemberTable();
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage(),ButtonType.OK).show();
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -131,7 +143,8 @@ public class MemberFormController implements Initializable {
             boolean isSaved = memberBO.saveMember(new MemberDTO(id, name, address, mobile, dob, gender));
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
-                loadMemberTable();
+                tblMember.getItems().add(new MemberTM(id, name, address, mobile, dob, gender));
+                tblMember.refresh();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -150,6 +163,8 @@ public class MemberFormController implements Initializable {
             boolean isUpdated = memberBO.updateMember(new MemberDTO(id, name, address, mobile, dob, gender));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
+                //tblMember.getItems().add(new MemberTM(id, name, address, mobile, dob, gender));
+                //tblMember.refresh();
                 loadMemberTable();
             }
         } catch (SQLException | ClassNotFoundException e) {

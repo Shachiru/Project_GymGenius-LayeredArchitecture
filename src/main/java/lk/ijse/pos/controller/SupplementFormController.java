@@ -146,7 +146,8 @@ public class SupplementFormController implements Initializable {
             boolean isSaved = supplementBO.saveSupplement(new SupplementDTO(id, productName, unitPrice, qty));
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Saved").show();
-                loadSupplementTable();
+                tblSupplement.getItems().add(new SupplementTM(id, productName, unitPrice, qty));
+                tblSupplement.refresh();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,"Error").show();
@@ -164,8 +165,9 @@ public class SupplementFormController implements Initializable {
             boolean isUpdated = supplementBO.updateSupplement(new SupplementDTO(id, productName, unitPrice, qty));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated");
+                tblSupplement.getItems().add(new SupplementTM(id, productName, unitPrice, qty));
+                tblSupplement.refresh();
             }
-            loadSupplementTable();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

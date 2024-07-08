@@ -2,6 +2,7 @@ package lk.ijse.pos.dao.custom.impl;
 
 import lk.ijse.pos.dao.SQLUtil;
 import lk.ijse.pos.dao.custom.SupplementDAO;
+import lk.ijse.pos.dto.SupplementDTO;
 import lk.ijse.pos.entity.Supplement;
 
 import java.sql.ResultSet;
@@ -60,6 +61,11 @@ public class SupplementDAOImpl implements SupplementDAO {
             return supCount;
         }
         return Integer.parseInt(null);
+    }
+
+    @Override
+    public SupplementDTO search(String supplementId) throws SQLException {
+        return null;
     }
 
     ///////////  thawa updateQTY method ekak ithurui    ////////////

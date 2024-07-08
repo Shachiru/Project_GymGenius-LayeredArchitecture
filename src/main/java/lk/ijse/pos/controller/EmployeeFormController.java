@@ -161,7 +161,8 @@ public class EmployeeFormController implements Initializable {
             boolean isSaved = employeeBO.saveEmployee(new EmployeeDTO(id, name, address, mobile, role, userId));
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee saved").show();
-                loadEmployeeTable();
+                tblEmployee.getItems().add(new EmployeeTM(id,name,address,mobile,role,userId));
+                tblEmployee.refresh();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,"Enter update button").show();
@@ -180,7 +181,8 @@ public class EmployeeFormController implements Initializable {
             boolean isUpdated = employeeBO.updateEmployee(new EmployeeDTO(id,name,address,mobile,role,userId));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee updated").show();
-                loadEmployeeTable();
+                tblEmployee.getItems().add(new EmployeeTM(id,name,address,mobile,role,userId));
+                tblEmployee.refresh();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
