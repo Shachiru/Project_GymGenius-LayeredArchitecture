@@ -8,6 +8,7 @@ import lk.ijse.pos.entity.Supplement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface SupplementBO extends SuperBO {
     ResultSet generateNextIdSupplement() throws SQLException, ClassNotFoundException;
@@ -21,4 +22,8 @@ public interface SupplementBO extends SuperBO {
     boolean deleteSupplement(String id) throws SQLException, ClassNotFoundException;
 
     int countSupplement() throws SQLException, ClassNotFoundException;
+
+    List<String> getSupIds() throws SQLException, ClassNotFoundException;
+
+    SupplementDTO searchSupplement(String supplementId) throws SQLException, ClassNotFoundException;
 }

@@ -9,6 +9,7 @@ import lk.ijse.pos.entity.Supplement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SupplementBOImpl implements SupplementBO {
     SupplementDAO supplementDAO = (SupplementDAO) DAOFactory.getDaoFactory().getDAOType(DAOFactory.DAOTypes.SUPPLEMENT);
@@ -46,5 +47,17 @@ public class SupplementBOImpl implements SupplementBO {
     @Override
     public int countSupplement() throws SQLException, ClassNotFoundException {
         return supplementDAO.count();
+    }
+
+    @Override
+    public List<String> getSupIds() throws SQLException, ClassNotFoundException {
+        return supplementDAO.getSupIds();
+    }
+
+    @Override
+    public SupplementDTO searchSupplement(String supplementId) throws SQLException, ClassNotFoundException {
+        Supplement supplement = supplementDAO.search(supplementId);
+        SupplementDTO supplementDTO = new SupplementDTO(supplement.getId(),supplement.getProductName(),supplement.getUnitPrice(),supplement.getQty());
+        return supplementDTO;
     }
 }

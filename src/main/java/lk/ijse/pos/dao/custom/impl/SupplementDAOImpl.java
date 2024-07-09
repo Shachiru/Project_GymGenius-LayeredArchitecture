@@ -3,11 +3,14 @@ package lk.ijse.pos.dao.custom.impl;
 import lk.ijse.pos.dao.SQLUtil;
 import lk.ijse.pos.dao.custom.SupplementDAO;
 import lk.ijse.pos.dto.SupplementDTO;
+import lk.ijse.pos.entity.Member;
 import lk.ijse.pos.entity.Supplement;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SupplementDAOImpl implements SupplementDAO {
     @Override
@@ -64,8 +67,27 @@ public class SupplementDAOImpl implements SupplementDAO {
     }
 
     @Override
-    public SupplementDTO search(String supplementId) throws SQLException {
-        return null;
+    public List<String> getSupIds() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT ID from supplements");
+        List<String> supIds = new ArrayList<>();
+        while (rst.next()){
+            supIds.add(rst.getString(1));
+        }
+        return supIds;
+    }
+
+    @Override
+    public Supplement search(String supplementId) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * from supplements where ID = ?",supplementId);
+        Supplement supplement = null;
+        if (rst.next()) {
+            String id = rst.getString(1);
+            String name = rst.getString(2);
+            String unitPrice = rst.getString(3);
+            String qty = rst.getString(4);
+            supplement = new Supplement(id, name, unitPrice, qty);
+        }
+        return supplement;
     }
 
     ///////////  thawa updateQTY method ekak ithurui    ////////////

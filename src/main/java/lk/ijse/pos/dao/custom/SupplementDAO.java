@@ -7,7 +7,11 @@ import lk.ijse.pos.entity.Supplement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface SupplementDAO extends CrudDAO<Supplement> {
-    SupplementDTO search(String supplementId) throws SQLException;
+    List<String> getSupIds() throws SQLException, ClassNotFoundException;
+
+    Supplement search(String supplementId) throws SQLException, ClassNotFoundException;
 }
