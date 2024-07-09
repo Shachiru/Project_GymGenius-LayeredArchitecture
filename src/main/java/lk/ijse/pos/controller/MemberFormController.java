@@ -120,8 +120,6 @@ public class MemberFormController implements Initializable {
             boolean isDeleted = memberBO.deleteMember(id);
             if (isDeleted){
                 new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
-                //tblMember.refresh();
-                //setCellValueFactory();
                 loadMemberTable();
             }
         } catch (SQLException e) {
@@ -163,8 +161,6 @@ public class MemberFormController implements Initializable {
             boolean isUpdated = memberBO.updateMember(new MemberDTO(id, name, address, mobile, dob, gender));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
-                //tblMember.getItems().add(new MemberTM(id, name, address, mobile, dob, gender));
-                //tblMember.refresh();
                 loadMemberTable();
             }
         } catch (SQLException | ClassNotFoundException e) {

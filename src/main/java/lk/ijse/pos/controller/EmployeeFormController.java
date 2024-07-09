@@ -14,6 +14,7 @@ import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.EmployeeBO;
 import lk.ijse.pos.dto.EmployeeDTO;
 import lk.ijse.pos.tdm.EmployeeTM;
+import lk.ijse.pos.tdm.MemberTM;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -75,17 +76,21 @@ public class EmployeeFormController implements Initializable {
     }
 
     private void loadEmployeeTable() {
+        ObservableList<EmployeeTM> tmList = FXCollections.observableArrayList();
         try {
             ArrayList<EmployeeDTO> allEmployee = employeeBO.getAllEmployee();
             for (EmployeeDTO employeeDTO : allEmployee) {
-                tblEmployee.getItems().add(new EmployeeTM(
+                EmployeeTM employeeTM = new EmployeeTM(
                         employeeDTO.getId(),
                         employeeDTO.getName(),
                         employeeDTO.getAddress(),
                         employeeDTO.getMobile(),
                         employeeDTO.getEmpRole(),
-                        employeeDTO.getUserId()));
+                        employeeDTO.getUserId());
+                tmList.add(employeeTM);
             }
+            tblEmployee.setItems(tmList);
+            tblEmployee.refresh();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -141,7 +146,7 @@ public class EmployeeFormController implements Initializable {
         try {
             boolean isDeleted = employeeBO.deleteEmployee(id);
             if (isDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!");
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
                 loadEmployeeTable();
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -181,8 +186,7 @@ public class EmployeeFormController implements Initializable {
             boolean isUpdated = employeeBO.updateEmployee(new EmployeeDTO(id,name,address,mobile,role,userId));
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee updated").show();
-                tblEmployee.getItems().add(new EmployeeTM(id,name,address,mobile,role,userId));
-                tblEmployee.refresh();
+                loadEmployeeTable();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

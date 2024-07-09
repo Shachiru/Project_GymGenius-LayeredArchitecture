@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Pane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.SupplementBO;
 import lk.ijse.pos.dto.SupplementDTO;
+import lk.ijse.pos.tdm.MemberTM;
 import lk.ijse.pos.tdm.SupplementTM;
 import lombok.SneakyThrows;
 
@@ -99,15 +101,19 @@ public class SupplementFormController implements Initializable {
     }
 
     private void loadSupplementTable() {
+        ObservableList<SupplementTM> tmList = FXCollections.observableArrayList();
         try {
             ArrayList<SupplementDTO> allSupplement = supplementBO.getAllSupplement();
             for (SupplementDTO supplementDTO: allSupplement) {
-                tblSupplement.getItems().add(new SupplementTM(
+                SupplementTM supplementTM = new SupplementTM(
                         supplementDTO.getId(),
                         supplementDTO.getProductName(),
                         supplementDTO.getUnitPrice(),
-                        supplementDTO.getQty()));
+                        supplementDTO.getQty());
+                tmList.add(supplementTM);
             }
+            tblSupplement.setItems(tmList);
+            tblSupplement.refresh();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -127,9 +133,9 @@ public class SupplementFormController implements Initializable {
         try {
             boolean isDeleted = supplementBO.deleteSupplement(id);
             if (isDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted");
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted").show();
+                loadSupplementTable();
             }
-            loadSupplementTable();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -164,9 +170,8 @@ public class SupplementFormController implements Initializable {
         try {
             boolean isUpdated = supplementBO.updateSupplement(new SupplementDTO(id, productName, unitPrice, qty));
             if (isUpdated){
-                new Alert(Alert.AlertType.CONFIRMATION,"Updated");
-                tblSupplement.getItems().add(new SupplementTM(id, productName, unitPrice, qty));
-                tblSupplement.refresh();
+                new Alert(Alert.AlertType.CONFIRMATION,"Updated").show();
+                loadSupplementTable();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
