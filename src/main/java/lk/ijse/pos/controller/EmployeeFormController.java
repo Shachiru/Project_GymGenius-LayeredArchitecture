@@ -71,6 +71,30 @@ public class EmployeeFormController implements Initializable {
         initUI();
     }
 
+    public String generateEmployeeId() throws SQLException, ClassNotFoundException {
+        try {
+            ResultSet rst = employeeBO.generateNextIdEmployee();
+            String currentEmpId = "";
+            if (rst.next()){
+                currentEmpId = rst.getString(1);
+                return nextEmpId(currentEmpId);
+            }
+            return nextEmpId(null);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String nextEmpId(String currentEmpId) {
+        if (currentEmpId != null) {
+            String[] split = currentEmpId.split("Emp ");
+            int empId = Integer.parseInt(split[1]);
+            empId++;
+            return "Emp " + empId;
+        }
+        return "Emp 1";
+    }
+
     private void initUI() {
         txtEmpId.setDisable(true);
     }
@@ -102,32 +126,6 @@ public class EmployeeFormController implements Initializable {
         colEmpAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colEmpMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         colEmpRole.setCellValueFactory(new PropertyValueFactory<>("empRole"));
-    }
-
-    public String generateEmployeeId() throws SQLException, ClassNotFoundException {
-        try {
-            ResultSet rst = employeeBO.generateNextIdEmployee();
-            String currentEmpId = "";
-            if (rst.next()){
-                currentEmpId = rst.getString(1);
-                return nextEmpId(currentEmpId);
-            }
-            return nextEmpId(null);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String nextEmpId(String currentEmpId) {
-        if (currentEmpId != null) {
-            String[] split = currentEmpId.split("Emp ");
-            int empId = Integer.parseInt(split[1]);
-            empId++;
-            return "Emp " + empId;
-        }
-        return "Emp 1";
     }
 
     @FXML

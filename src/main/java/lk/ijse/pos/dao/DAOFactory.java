@@ -2,10 +2,7 @@ package lk.ijse.pos.dao;
 
 import lk.ijse.pos.dao.custom.EmployeeDAO;
 import lk.ijse.pos.dao.custom.MemberDAO;
-import lk.ijse.pos.dao.custom.impl.EmployeeDAOImpl;
-import lk.ijse.pos.dao.custom.impl.MemberDAOImpl;
-import lk.ijse.pos.dao.custom.impl.SupplementDAOImpl;
-import lk.ijse.pos.dao.custom.impl.UserDAOImpl;
+import lk.ijse.pos.dao.custom.impl.*;
 
 import java.security.PublicKey;
 
@@ -33,6 +30,10 @@ public SuperDAO getDAOType(DAOTypes type) {
             return new UserDAOImpl();
         case SUPPLEMENT:
             return new SupplementDAOImpl();
+        case ORDER:
+            return new OrderDAOImpl();
+        case ORDER_DETAILS:
+            return new OrderDetailsDAOImpl();
         default:
             return null;
     }

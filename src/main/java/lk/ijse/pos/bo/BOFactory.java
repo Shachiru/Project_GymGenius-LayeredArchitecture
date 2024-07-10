@@ -1,10 +1,7 @@
 package lk.ijse.pos.bo;
 
 import lk.ijse.pos.bo.custom.MemberBO;
-import lk.ijse.pos.bo.custom.impl.EmployeeBOImpl;
-import lk.ijse.pos.bo.custom.impl.MemberBOImpl;
-import lk.ijse.pos.bo.custom.impl.SupplementBOImpl;
-import lk.ijse.pos.bo.custom.impl.UserBOImpl;
+import lk.ijse.pos.bo.custom.impl.*;
 
 import static lk.ijse.pos.dao.DAOFactory.DAOTypes.EMPLOYEE;
 import static lk.ijse.pos.dao.DAOFactory.DAOTypes.USER;
@@ -35,6 +32,10 @@ public class BOFactory {
                 return new UserBOImpl();
             case SUPPLEMENT:
                 return new SupplementBOImpl();
+            case ORDER:
+                return new OrderBOImpl();
+            case ORDER_DETAILS:
+                return new OrderDetailsBOImpl();
             default:
                 return null;
         }
