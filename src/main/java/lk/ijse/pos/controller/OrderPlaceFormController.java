@@ -16,6 +16,7 @@ import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.MemberBO;
 import lk.ijse.pos.bo.custom.SupplementBO;
 import lk.ijse.pos.dto.MemberDTO;
+import lk.ijse.pos.dto.SupplementDTO;
 import lk.ijse.pos.entity.Member;
 
 import java.net.URL;
@@ -136,7 +137,18 @@ public class OrderPlaceFormController implements Initializable {
 
     @FXML
     void cmbSupplementIdOnAction(ActionEvent event) {
-
+        String supplementId = cmbSupplementId.getValue();
+        try {
+            SupplementDTO supplement = supplementBO.searchSupplement(supplementId);
+            if (supplement != null) {
+                lblDescription.setText(supplement.getProductName());
+                lblUnitPrice.setText(supplement.getUnitPrice());
+                lblQtyOnHand.setText(supplement.getQty());
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
+//// order id ekk generate wenna ona initialize eke

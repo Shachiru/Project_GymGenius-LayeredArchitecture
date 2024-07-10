@@ -137,7 +137,6 @@ public class EmployeeFormController implements Initializable {
         txtEmpAddress.setText("");
         txtEmpMobile.setText("");
         txtEmpRole.setText("");
-
     }
 
     @FXML
@@ -213,5 +212,4 @@ public class EmployeeFormController implements Initializable {
 
 }
 
-/////  exist id method ekk ghnna ona
 
