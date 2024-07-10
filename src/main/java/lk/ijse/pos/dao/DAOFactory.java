@@ -24,17 +24,17 @@ public class DAOFactory {
     }
 
 public SuperDAO getDAOType(DAOTypes type) {
-        switch (type) {
-            case MEMBER:
-                return new MemberDAOImpl();
-            case EMPLOYEE:
-                return new EmployeeDAOImpl();
-            case USER:
-                return new UserDAOImpl();
-            case SUPPLEMENT:
-                return new SupplementDAOImpl();
-            default:
-                return null;
-        }
+    switch (type) {
+        case MEMBER:
+            return new MemberDAOImpl();
+        case EMPLOYEE:
+            return new EmployeeDAOImpl();
+        case USER:
+            return new UserDAOImpl();
+        case SUPPLEMENT:
+            return new SupplementDAOImpl();
+        default:
+            return null;
+    }
 }
 }

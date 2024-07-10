@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplementBOImpl implements SupplementBO {
+
     SupplementDAO supplementDAO = (SupplementDAO) DAOFactory.getDaoFactory().getDAOType(DAOFactory.DAOTypes.SUPPLEMENT);
 
     @Override

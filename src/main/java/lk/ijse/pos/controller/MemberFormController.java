@@ -163,7 +163,7 @@ public class MemberFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
                 loadMemberTable();
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException  | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

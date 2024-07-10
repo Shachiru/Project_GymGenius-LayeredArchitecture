@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.MemberBO;
+import lk.ijse.pos.bo.custom.SupplementBO;
 import lk.ijse.pos.dto.MemberDTO;
 import lk.ijse.pos.entity.Member;
 
@@ -32,7 +33,7 @@ public class OrderPlaceFormController implements Initializable {
     @FXML
     private JFXComboBox<String> cmbMemberId;
     @FXML
-    private JFXComboBox<?> cmbSupplementId;
+    private JFXComboBox<String> cmbSupplementId;
     @FXML
     private TableColumn<?, ?> colAction;
     @FXML
@@ -67,6 +68,7 @@ public class OrderPlaceFormController implements Initializable {
     private TextField txtTotal;
 
     MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
+    SupplementBO supplementBO = (SupplementBO) BOFactory.getInstance().getBOType(BOFactory.BOType.SUPPLEMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,7 +84,16 @@ public class OrderPlaceFormController implements Initializable {
     }
 
     private void getSupplementId() {
-
+        ObservableList<String> supplementList = FXCollections.observableArrayList();
+        try {
+            List<String> supplementIdList = supplementBO.getSupIds();
+            for (String sId : supplementIdList) {
+                supplementList.add(sId);
+            }
+            cmbSupplementId.setItems(supplementList);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void getMemberId() {
