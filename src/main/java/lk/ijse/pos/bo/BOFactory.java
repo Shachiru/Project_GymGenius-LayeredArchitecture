@@ -36,8 +36,8 @@ public class BOFactory {
                 return new OrderBOImpl();
             case ORDER_DETAILS:
                 return new OrderDetailsBOImpl();
-                case PLACE_ORDER:
-                    return new PlaceOrderBOImpl();
+            case PLACE_ORDER:
+                return new PlaceOrderBOImpl();
             default:
                 return null;
         }
