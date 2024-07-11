@@ -4,6 +4,7 @@ import lk.ijse.pos.dao.SQLUtil;
 import lk.ijse.pos.dao.custom.SupplementDAO;
 import lk.ijse.pos.dto.SupplementDTO;
 import lk.ijse.pos.entity.Member;
+import lk.ijse.pos.entity.OrderDetails;
 import lk.ijse.pos.entity.Supplement;
 
 import java.sql.PreparedStatement;
@@ -90,5 +91,19 @@ public class SupplementDAOImpl implements SupplementDAO {
         return supplement;
     }
 
-    ///////////  thawa updateQTY method ekak ithurui    ////////////
+    @Override
+    public boolean updateSupplementQty(List<OrderDetails> orderDetail) throws SQLException, ClassNotFoundException {
+        for (OrderDetails od : orderDetail){
+            if(!updateSupplementQty(od)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean updateSupplementQty(OrderDetails od) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("UPDATE supplements set Qty = Qty - ? where ID = ? ",
+                od.getQty(),
+                od.getSupplement_id());
+    }
 }

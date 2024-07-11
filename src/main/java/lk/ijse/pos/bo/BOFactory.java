@@ -18,7 +18,7 @@ public class BOFactory {
     }
 
     public enum BOType{
-        EMPLOYEE,MEMBER,ORDER,ORDER_DETAILS,SUPPLEMENT,USER
+        EMPLOYEE,MEMBER,ORDER,ORDER_DETAILS,SUPPLEMENT,USER,PLACE_ORDER
 
     }
 
@@ -36,6 +36,8 @@ public class BOFactory {
                 return new OrderBOImpl();
             case ORDER_DETAILS:
                 return new OrderDetailsBOImpl();
+                case PLACE_ORDER:
+                    return new PlaceOrderBOImpl();
             default:
                 return null;
         }

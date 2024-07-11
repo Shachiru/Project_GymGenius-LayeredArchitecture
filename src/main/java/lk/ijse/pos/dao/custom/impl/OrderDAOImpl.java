@@ -21,7 +21,10 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public boolean save(Order entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT into orders values (?,?,?)",
+                entity.getOrderId(),
+                entity.getDate(),
+                entity.getMemberId());
     }
 
     @Override

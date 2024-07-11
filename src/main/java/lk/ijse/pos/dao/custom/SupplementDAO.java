@@ -2,6 +2,7 @@ package lk.ijse.pos.dao.custom;
 
 import lk.ijse.pos.dao.CrudDAO;
 import lk.ijse.pos.dto.SupplementDTO;
+import lk.ijse.pos.entity.OrderDetails;
 import lk.ijse.pos.entity.Supplement;
 
 import java.sql.PreparedStatement;
@@ -14,4 +15,5 @@ public interface SupplementDAO extends CrudDAO<Supplement> {
     List<String> getSupIds() throws SQLException, ClassNotFoundException;
 
     Supplement search(String supplementId) throws SQLException, ClassNotFoundException;
-}
+
+    public boolean updateSupplementQty(List<OrderDetails> orderDetail) throws SQLException, ClassNotFoundException;}

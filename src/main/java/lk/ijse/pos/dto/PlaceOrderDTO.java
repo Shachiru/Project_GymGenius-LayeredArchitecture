@@ -14,6 +14,6 @@ import java.util.List;
 @Data
 
 public class PlaceOrderDTO implements Serializable {
-    private Order order;
-    private List<OrderDetails> orderDetail;
+    private OrderDTO order;
+    private List<OrderDetailsDTO> orderDetail;
 }

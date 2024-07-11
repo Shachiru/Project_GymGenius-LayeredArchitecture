@@ -14,11 +14,18 @@ import javafx.scene.layout.Pane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.MemberBO;
 import lk.ijse.pos.bo.custom.OrderBO;
+import lk.ijse.pos.bo.custom.PlaceOrderBO;
 import lk.ijse.pos.bo.custom.SupplementBO;
-import lk.ijse.pos.dto.MemberDTO;
-import lk.ijse.pos.dto.SupplementDTO;
+import lk.ijse.pos.bo.custom.impl.PlaceOrderBOImpl;
+import lk.ijse.pos.db.DBConnection;
+import lk.ijse.pos.dto.*;
 import lk.ijse.pos.entity.Member;
 import lk.ijse.pos.tdm.OrderTM;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
 import java.sql.Date;
@@ -33,7 +40,6 @@ import java.util.ResourceBundle;
 public class OrderPlaceFormController implements Initializable {
     @FXML
     private JFXButton btnAddToCart;
-
     @FXML
     private JFXButton btnPlaceOrder;
     @FXML
@@ -79,6 +85,7 @@ public class OrderPlaceFormController implements Initializable {
     MemberBO memberBO = (MemberBO) BOFactory.getInstance().getBOType(BOFactory.BOType.MEMBER);
     SupplementBO supplementBO = (SupplementBO) BOFactory.getInstance().getBOType(BOFactory.BOType.SUPPLEMENT);
     OrderBO orderBO = (OrderBO) BOFactory.getInstance().getBOType(BOFactory.BOType.ORDER);
+    PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getInstance().getBOType(BOFactory.BOType.PLACE_ORDER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,12 +116,12 @@ public class OrderPlaceFormController implements Initializable {
 
     private String nextOrderId(String currentOrderId){
         if (currentOrderId != null) {
-            String[] split = currentOrderId.split("O ");
+            String[] split = currentOrderId.split("Order ");
             int orderID = Integer.parseInt(split[1]);
             orderID++;
-            return "O " + orderID;
+            return "Order " + orderID;
         }
-        return "O 1";
+        return "Order 1";
     }
 
     private void setDate() {
@@ -176,7 +183,6 @@ public class OrderPlaceFormController implements Initializable {
             if (type.orElse(no) == yes) {
                 int selectedIndex = tblShopCart.getSelectionModel().getSelectedIndex();
                 cartList.remove(selectedIndex);
-
                 tblShopCart.refresh();
                 calculateNetTotal();
             }
@@ -215,18 +221,18 @@ public class OrderPlaceFormController implements Initializable {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
-        /*String orderId = lblOrderId.getText();
+        String orderId = lblOrderId.getText();
         Date date = Date.valueOf(lblOrderDate.getText());
         String memberId = cmbMemberId.getValue();
 
         double orderAmount = 0;
-        Order order = new Order(orderId, date, memberId);
-        List<OrderDetail> orderList = new ArrayList<>();
+        OrderDTO order = new OrderDTO(orderId, date, memberId);
+        List<OrderDetailsDTO> orderList = new ArrayList<>();
 
         for (int i = 0; i < tblShopCart.getItems().size(); i++) {
-            OrderTm orderTm = cartList.get(i);
+            OrderTM orderTm = cartList.get(i);
 
-            OrderDetail orderDetail = new OrderDetail(
+            OrderDetailsDTO orderDetail = new OrderDetailsDTO(
                     orderId,
                     orderTm.getSupplement_id(),
                     orderTm.getQty(),
@@ -235,10 +241,10 @@ public class OrderPlaceFormController implements Initializable {
             );
             orderList.add(orderDetail);
         }
-        PlaceOrder placeOrder = new PlaceOrder(order, orderList);
+        PlaceOrderDTO placeOrder = new PlaceOrderDTO(order, orderList);
 
         try {
-            boolean isOrderPlaced = PlaceOrderRepo.orderPlaced(placeOrder);
+            boolean isOrderPlaced = placeOrderBO.orderPlaced(placeOrder);
             if (isOrderPlaced) {
                 ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
                 ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -256,11 +262,11 @@ public class OrderPlaceFormController implements Initializable {
                     JasperReport jasperReport =
                             JasperCompileManager.compileReport(jasperDesign);
 
-                    JasperPrint jasperPrint =
-                            JasperFillManager.fillReport(
-                                    jasperReport,
-                                    null,
-                                    DbConnection.getInstance().getConnection());
+                    JasperPrint jasperPrint;
+                    jasperPrint = JasperFillManager.fillReport(
+                            jasperReport,
+                            null,
+                            DBConnection.getDbConnection().getConnection());
 
                     JasperViewer.viewReport(jasperPrint,false);
                 }
@@ -269,9 +275,9 @@ public class OrderPlaceFormController implements Initializable {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (JRException e) {
+        } catch (JRException | ClassNotFoundException e) {
             throw new RuntimeException(e);
-        }*/
+        }
     }
 
     @FXML

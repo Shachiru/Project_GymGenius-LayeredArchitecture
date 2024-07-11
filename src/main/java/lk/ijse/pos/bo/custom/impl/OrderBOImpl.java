@@ -26,7 +26,7 @@ public class OrderBOImpl implements OrderBO {
 
     @Override
     public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return orderDAO.save(new Order(dto.getOrderId(),dto.getDate(),dto.getMemberId()));
     }
 
     @Override
